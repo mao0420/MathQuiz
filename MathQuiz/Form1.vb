@@ -105,19 +105,24 @@
             ' CheckTheAnswer()がtrueを返せば、ユーザーは正解したことになります。 
             ' その際にタイマーを停止します。
             Timer1.Stop()
+            timeLabel.BackColor = Color.Transparent
             MessageBox.Show("全問正解しました！", "Congratulations!")
             startButton.Enabled = True
         ElseIf timeLeft > 0 Then
             ' CheckTheAnswer()がfalseを返したら、カウントダウンを続けます。
             ' 残り時間を 1 秒減らして、新しい残り時間でラベルを更新して表示します。
             timeLeft -= 1
+            If 6 > timeLeft Then
+                timeLabel.BackColor = Color.Red
+            End If
             timeLabel.Text = timeLeft & " seconds"
         Else
             ' 時間切れの場合は、タイマーを止め、メッセージを表示する。
             ' その際に各NumericUpDownコントロールに正解を表示します。
             Timer1.Stop()
+            timeLabel.BackColor = Color.Transparent
             timeLabel.Text = "Time's up!"
-            MessageBox.Show("時間内に全て正解出来なかった！", "Sorry!")
+            MessageBox.Show("時間切れ！", "Sorry!")
             sum.Value = addend1 + addend2
             difference.Value = minuend - subtrahend
             product.Value = multiplicand * multiplier
@@ -133,4 +138,40 @@
         startButton.Enabled = False
     End Sub
 
+    Private Sub answer_Enter(sender As Object, e As EventArgs) Handles sum.Enter, difference.Enter, product.Enter, quotient.Enter
+
+        ' NumericUpDown選択時に格納されている値が選択中の状態となります。
+        Dim answerBox = TryCast(sender, NumericUpDown)
+
+        If answerBox IsNot Nothing Then
+            Dim lengthOfAnswer = answerBox.Value.ToString().Length
+            answerBox.Select(0, lengthOfAnswer)
+        End If
+
+    End Sub
+
+    Private Sub sumAnswer_Sound(sender As Object, e As EventArgs) Handles sum.ValueChanged
+        If addend1 + addend2 = sum.Value Then
+            'メッセージ（情報）を鳴らす
+            System.Media.SystemSounds.Asterisk.Play()
+        End If
+    End Sub
+    Private Sub differenceAnswer_Sound(sender As Object, e As EventArgs) Handles difference.ValueChanged
+        If minuend - subtrahend = difference.Value Then
+            'メッセージ（情報）を鳴らす
+            System.Media.SystemSounds.Asterisk.Play()
+        End If
+    End Sub
+    Private Sub productAnswer_Sound(sender As Object, e As EventArgs) Handles product.ValueChanged
+        If multiplicand * multiplier = product.Value Then
+            'メッセージ（情報）を鳴らす
+            System.Media.SystemSounds.Asterisk.Play()
+        End If
+    End Sub
+    Private Sub quotientAnswer_Sound(sender As Object, e As EventArgs) Handles quotient.ValueChanged
+        If dividend / divisor = quotient.Value Then
+            'メッセージ（情報）を鳴らす
+            System.Media.SystemSounds.Asterisk.Play()
+        End If
+    End Sub
 End Class
