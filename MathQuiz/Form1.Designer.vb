@@ -22,6 +22,7 @@ Partial Class Form1
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.timeLabel = New System.Windows.Forms.Label()
         Me.timeLeftLabel = New System.Windows.Forms.Label()
         Me.plusLeftLabel = New System.Windows.Forms.Label()
@@ -45,6 +46,7 @@ Partial Class Form1
         Me.Label7 = New System.Windows.Forms.Label()
         Me.dividedLeftLabel = New System.Windows.Forms.Label()
         Me.startButton = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.sum, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.difference, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.product, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -274,6 +276,9 @@ Partial Class Form1
         Me.startButton.Text = "Start the quiz"
         Me.startButton.UseVisualStyleBackColor = True
         '
+        'Timer1
+        '
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -338,4 +343,5 @@ Partial Class Form1
     Friend WithEvents Label7 As Label
     Friend WithEvents dividedLeftLabel As Label
     Friend WithEvents startButton As Button
+    Friend WithEvents Timer1 As Timer
 End Class
