@@ -84,6 +84,7 @@
         timeLabel.Text = "30 seconds"
         Timer1.Start()
     End Sub
+
     Public Function CheckTheAnswer() As Boolean
 
         If addend1 + addend2 = sum.Value AndAlso
@@ -109,7 +110,6 @@
         ElseIf timeLeft > 0 Then
             ' CheckTheAnswer()がfalseを返したら、カウントダウンを続けます。
             ' 残り時間を 1 秒減らして、新しい残り時間でラベルを更新して表示します。
-            ' 
             timeLeft -= 1
             timeLabel.Text = timeLeft & " seconds"
         Else
